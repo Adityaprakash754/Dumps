@@ -54,9 +54,17 @@ int main()
                 while(temp != 0){
                     int x = temp / p[i].first;
                     if(x > 0){
-                        soln[i] -= x;
-                        p[i].second += x;
-                        temp -= x*p[i].first;
+                        if(soln[i] - x >= 0){
+                            soln[i] -= x;
+                            p[i].second += x;
+                            temp -= x*p[i].first;
+                        }
+                        else{
+                            int t1 = soln[i];
+                            soln[i] = 0;
+                            p[i].second += t1;
+                            temp -= t1*p[i].first;
+                        }
                     }
                     else
                         i--;
