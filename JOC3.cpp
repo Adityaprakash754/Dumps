@@ -1,7 +1,4 @@
-
 #include <bits/stdc++.h>
-//#include<stack>
-
 using namespace std;
 
 int main()
@@ -14,41 +11,38 @@ int main()
     
     stack<char> ch;
     
-    int x,y,z;
-    x = y = 0;
-    
     for(int i = 0; i < len; i++){
-        if(s[i] != ')'){
+        if(ch.empty() || s[i] == '(' || ch.top() != '('){
             ch.push(s[i]);
-            x++;
         }
             
         else{
-            if(!ch.empty()){
+            if(!ch.empty() && ch.top() == '('){
                 ch.pop();
-                y++;
             }
         }
         
     }
     
-    z = len - (x + y);
-    y = y + z;
-    
-    if(x != y){
-        if(x > y){
-            cout << x - y << endl;
-            cout << "')' is needed" << endl;
-        }
-        else {
-            cout << y - x << endl;
-            cout << "'(' is needed" << endl;
-        }
+    int x,y;
+    x = y = 0;
+    while(!ch.empty()){
+        char z = ch.top();
+        ch.pop();
         
+        if(z == '(')
+            x++;
+        else
+            y++;
     }
-    else{
+    
+    if(x == y &&  x == 0){
         cout << "0"<< endl;
         cout << "The exp is balanced"<< endl;
+    }
+    else{
+        cout << x << "')' is needed" << endl;
+        cout << y <<"'(' is needed" << endl;
     }
     
 
